@@ -7,10 +7,8 @@ try {
     
     if($con->connect_errno){
         throw new Exception($con->connect_error);
-    } else {
-        print "It works!";
-    }
-
+    } 
+    
 } catch (Exception $e) {
     print_r($e);
     die();

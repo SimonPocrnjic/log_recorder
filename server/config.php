@@ -2,4 +2,4 @@
 define('SERVER', 'localhost');
 define('USER', 'root');
 define('PASSWORD', '');
-define('DATABASE', 'logapi');
+define('DATABASE', 'log_storage');

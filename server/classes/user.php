@@ -1,16 +1,163 @@
 <?php 
 
+    namespace Server\Classes;
+
     class User {
-        protected $id, $username, $email, $role;
+        private $id;
+        private $username;
+        private $password;
+        private $email;
+        private $role;
+        private $created;
+        private $updated;
+        private static $instance = NULL;
 
-        function__construct($id, $username, $email, $role) {
-            $this->$id = $id;
-            $this->$username = $username;
-            $this->$email = $email;
-            $this->$role = $role;
+        static public function getInstance()
+        {
+            if (self::$instance === NULL)
+                self::$instance = new User();
+            return self::$instance;
         }
 
-        public function create($mysqli) {
+        protected function __construct(){
+
+        }
+
+        function setUser($id, $username, $email, $role, $created, $updated) {
+            $this->id = $id;
+            $this->username = $username;
+            $this->email = $email;
+            $this->role = $role;
+            $this->created = $created;
+            $this->updated = $updated;
+        }
+
+        function id() {
+            return $this->id;
+        }
+
+        function username() {
+            return $this->username;
+        }
+
+        function email() {
+            return $this->email;
+        }
+
+        function role() {
+            return $this->role;
+        }
+
+        function create($mysqli, $username, $email, $password, $role) {
+            $sql = "INSERT INTO users(username, password, email, role) VALUES (?,?,?,?)";
+            if($stmt = $mysqli->prepare($sql)){
+                $stmt->bind_param('sssi', $this->username, $this->password, $this->email, $this->role);
+                $stmt->execute();
+
+                return "User was created.";
+
+            } else {
+                return $mysqli->connect_error;
+            }
+        }
+
+        function login($mysqli, $username, $password) {
+            //$sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
+            if($stmt = $mysqli->prepare("SELECT * FROM users WHERE username = ? LIMIT 1")){
+                $stmt->bind_param("s", $username);
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($user_id, $username, $dbpassword, $dbemail, $dbrole, $created, $updated);
+                $stmt->fetch();
+
+                if($stmt->num_rows == 1) {
+                    if($dbpassword == $password) {
+                        $user_browser = $_SERVER['HTTP_USER_AGENT'];
+                        $user_id = preg_replace("/[^0-9]+/", "", $user_id);
+                        $_SESSION['user_id'] = $user_id;
+                        $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
+
+                        $_SESSION['username'] = $username;
+                        $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
+                        $this->setUser($user_id, $username, $dbemail, $dbrole, $created, $updated);
+                        $array = $this;
+                        $serialized = serialize($array);
+                        $_SESSION['user'] = $serialized;
+                        
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        static function login_check($mysqli)
+        {
+            // Check if all session variables are set
+            if (isset($_SESSION['user_id'],
+                $_SESSION['username'],
+                $_SESSION['login_string'])) {
+
+                $user_id      = $_SESSION['user_id'];
+                $login_string = $_SESSION['login_string'];
+                $username     = $_SESSION['username'];
+
+                // Get the user-agent string of the user.
+                $user_browser = $_SERVER['HTTP_USER_AGENT'];
+
+                if ($stmt = $mysqli->prepare("SELECT *
+                                            FROM users
+                                            WHERE id = ? LIMIT 1")) {
+                    // Bind "$user_id" to parameter.
+                    $stmt->bind_param('i', $user_id);
+                    $stmt->execute(); // Execute the prepared query.
+                    $stmt->store_result();
+
+                    if ($stmt->num_rows == 1) {
+                        // If the user exists get variables from result.
+                        $stmt->bind_result($id, $username, $password, $email, $role, $created, $updated);
+                        $stmt->fetch();
+                        $login_check = hash('sha512', $password . $user_browser);
+
+                        if ($login_check == $login_string) {
+                            return true;
+                        } else {
+                            // Not logged in
+                            return false;
+                        }
+                    } else {
+                        // Not logged in
+                        return false;
+                    }
+                } else {
+                    // Not logged in
+                    return false;
+                }
+            } else {
+                // Not logged in
+                return false;
+            }
+        }
+
+        function logout() {
+            $_SESSION = array();
+	
+            $params = session_get_cookie_params();
             
+            setcookie(session_name(),
+                    '', time() - 86400, 
+                    $params["path"], 
+                    $params["domain"], 
+                    $params["secure"], 
+                    $params["httponly"]);
+        
+            session_destroy();
         }
+
+        function __destruct() {
+        }
+
     }
