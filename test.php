@@ -1,5 +1,7 @@
 <?php 
 
+require_once "includes/header.php";
+
 function getFileList($dir, $recurse = FALSE, $depth = FALSE)
   {
     $retval = [];
@@ -42,6 +44,22 @@ function getFileList($dir, $recurse = FALSE, $depth = FALSE)
     return $retval;
   }
 
-//var_dump(getFileList('users/admin/projects'));
+var_dump(getFileList('users/admin'));
 
 echo "<br>".str_replace(' ', "_", "something sdwddd dwd");
+
+// if(isset($_GET['test'])){
+//   print_r($_SERVER['REQUEST_METHOD']);
+  
+// }
+
+//openlog('CrawlerApp', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER);
+syslog(LOG_ERR, "User #14 is logged from two different places.");
+//closelog();
+//define_syslog_variables();
+?>
+
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
+  <input type="text" name="test">
+  <input type="submit" value="Submit">
+</form>

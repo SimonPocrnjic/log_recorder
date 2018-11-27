@@ -1,0 +1,138 @@
+[27-Nov-2018 11:12:51 UTC] PHP Parse error:  syntax error, unexpected 'syslog' (T_STRING) in C:\laragon\www\logcontrol\test.php on line 57
+[27-Nov-2018 11:12:52 UTC] PHP Parse error:  syntax error, unexpected 'syslog' (T_STRING) in C:\laragon\www\logcontrol\test.php on line 57
+[27-Nov-2018 11:12:52 UTC] PHP Parse error:  syntax error, unexpected 'syslog' (T_STRING) in C:\laragon\www\logcontrol\test.php on line 57
+[27-Nov-2018 11:13:06 UTC] PHP Notice:  Undefined variable: _SEVER in C:\laragon\www\logcontrol\test.php on line 62
+[27-Nov-2018 11:13:07 UTC] PHP Notice:  Undefined variable: _SEVER in C:\laragon\www\logcontrol\test.php on line 62
+[27-Nov-2018 11:21:24 UTC] PHP Parse error:  syntax error, unexpected 'syslog' (T_STRING), expecting ',' or ')' in C:\laragon\www\logcontrol\test.php on line 57
+[27-Nov-2018 12:15:21 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 29
+[27-Nov-2018 12:15:21 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on null in C:\laragon\www\logcontrol\index.php:29
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 29
+[27-Nov-2018 12:18:20 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in C:\laragon\www\logcontrol\server\autoload.php on line 10
+[27-Nov-2018 12:20:28 UTC] PHP Warning:  require_once(server/login.php): failed to open stream: No such file or directory in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:20:28 UTC] PHP Fatal error:  require_once(): Failed opening required 'server/login.php' (include_path='.;C:/laragon/etc/php/pear') in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:24:02 UTC] PHP Warning:  require_once(server/login.php): failed to open stream: No such file or directory in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:24:02 UTC] PHP Fatal error:  require_once(): Failed opening required 'server/login.php' (include_path='.;C:/laragon/etc/php/pear') in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:25:24 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\server\authcontrol.php on line 25
+[27-Nov-2018 12:25:24 UTC] PHP Fatal error:  Uncaught Error: Call to a member function logout() on null in C:\laragon\www\logcontrol\server\authcontrol.php:25
+Stack trace:
+#0 C:\laragon\www\logcontrol\index.php(3): require_once()
+#1 {main}
+  thrown in C:\laragon\www\logcontrol\server\authcontrol.php on line 25
+[27-Nov-2018 12:26:55 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 4
+[27-Nov-2018 12:27:22 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 4
+[27-Nov-2018 12:27:22 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 4
+[27-Nov-2018 12:27:25 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 4
+[27-Nov-2018 12:27:57 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 8
+[27-Nov-2018 12:27:57 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 8
+[27-Nov-2018 12:28:00 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 8
+[27-Nov-2018 12:28:30 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 7
+[27-Nov-2018 12:28:30 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:28:30 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on boolean in C:\laragon\www\logcontrol\index.php:32
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 32
+[27-Nov-2018 12:28:33 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:28:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on boolean in C:\laragon\www\logcontrol\index.php:32
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 32
+[27-Nov-2018 12:29:37 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:29:37 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on boolean in C:\laragon\www\logcontrol\index.php:32
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 32
+[27-Nov-2018 12:29:38 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:29:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on boolean in C:\laragon\www\logcontrol\index.php:32
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 32
+[27-Nov-2018 12:29:51 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:29:55 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:29:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on boolean in C:\laragon\www\logcontrol\index.php:32
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 32
+[27-Nov-2018 12:30:37 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 7
+[27-Nov-2018 12:30:37 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\index.php on line 3
+[27-Nov-2018 12:31:16 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 6
+[27-Nov-2018 12:31:27 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 6
+[27-Nov-2018 12:31:27 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 31
+[27-Nov-2018 12:31:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on null in C:\laragon\www\logcontrol\index.php:31
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 31
+[27-Nov-2018 12:33:26 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 6
+[27-Nov-2018 12:33:26 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\includes\header.php on line 16
+[27-Nov-2018 12:33:29 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\includes\header.php on line 16
+[27-Nov-2018 12:33:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function username() on boolean in C:\laragon\www\logcontrol\index.php:31
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 31
+[27-Nov-2018 12:35:39 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\index.php on line 6
+[27-Nov-2018 12:35:39 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\includes\header.php on line 16
+[27-Nov-2018 12:38:35 UTC] PHP Notice:  Undefined index: user in C:\laragon\www\logcontrol\includes\header.php on line 16
+[27-Nov-2018 12:43:32 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:47:39 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:47:44 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:48:14 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:48:32 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:48:35 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:49:25 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:49:26 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:50:07 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:50:11 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:50:18 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:50:37 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:50:46 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:51:04 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:51:18 UTC] PHP Notice:  Undefined index: username in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:52:04 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:52:49 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:53:54 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:54:04 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:54:14 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:56:00 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 12:56:29 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 13:01:35 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 13:02:12 UTC] PHP Notice:  Undefined index: user_id in C:\laragon\www\logcontrol\index.php on line 10
+[27-Nov-2018 13:06:04 UTC] PHP Fatal error:  Uncaught Error: Class 'User' not found in C:\laragon\www\logcontrol\index.php:2
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 2
+[27-Nov-2018 13:08:03 UTC] PHP Fatal error:  Uncaught Error: Class 'User' not found in C:\laragon\www\logcontrol\index.php:2
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\index.php on line 2
+[27-Nov-2018 13:20:25 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in C:\laragon\www\logcontrol\server\classes\User.php:107
+Stack trace:
+#0 C:\laragon\www\logcontrol\index.php(2): Server\Classes\User::login_check(Object(mysqli))
+#1 {main}
+  thrown in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:23:06 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:23:41 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:23:42 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:24:17 UTC] PHP Parse error:  syntax error, unexpected ')' in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:24:22 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'id' in C:\laragon\www\logcontrol\server\classes\User.php:107
+Stack trace:
+#0 C:\laragon\www\logcontrol\index.php(2): Server\Classes\User::login_check(Object(mysqli))
+#1 {main}
+  thrown in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:24:36 UTC] PHP Deprecated:  Non-static method Server\Classes\User::id() should not be called statically in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:24:36 UTC] PHP Fatal error:  Uncaught Error: Using $this when not in object context in C:\laragon\www\logcontrol\server\classes\User.php:36
+Stack trace:
+#0 C:\laragon\www\logcontrol\server\classes\User.php(107): Server\Classes\User::id()
+#1 C:\laragon\www\logcontrol\index.php(2): Server\Classes\User::login_check(Object(mysqli))
+#2 {main}
+  thrown in C:\laragon\www\logcontrol\server\classes\User.php on line 36
+[27-Nov-2018 13:25:39 UTC] PHP Fatal error:  Uncaught Error: Undefined class constant 'id' in C:\laragon\www\logcontrol\server\classes\User.php:107
+Stack trace:
+#0 C:\laragon\www\logcontrol\index.php(2): Server\Classes\User::login_check(Object(mysqli))
+#1 {main}
+  thrown in C:\laragon\www\logcontrol\server\classes\User.php on line 107
+[27-Nov-2018 13:25:59 UTC] PHP Fatal error:  Uncaught Error: Access to undeclared static property: Server\Classes\User::$id in C:\laragon\www\logcontrol\server\classes\User.php:107
+Stack trace:
+#0 C:\laragon\www\logcontrol\index.php(2): Server\Classes\User::login_check(Object(mysqli))
+#1 {main}
+  thrown in C:\laragon\www\logcontrol\server\classes\User.php on line 107

@@ -1,0 +1,33 @@
+[27-Nov-2018 12:20:41 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\server\authcontrol.php on line 25
+[27-Nov-2018 12:20:41 UTC] PHP Fatal error:  Uncaught Error: Call to a member function logout() on null in C:\laragon\www\logcontrol\server\authcontrol.php:25
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\server\authcontrol.php on line 25
+[27-Nov-2018 12:22:02 UTC] PHP Notice:  Undefined variable: logged in C:\laragon\www\logcontrol\server\authcontrol.php on line 27
+[27-Nov-2018 12:22:02 UTC] PHP Fatal error:  Uncaught Error: Call to a member function logout() on null in C:\laragon\www\logcontrol\server\authcontrol.php:27
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\server\authcontrol.php on line 27
+[27-Nov-2018 12:22:27 UTC] PHP Notice:  Undefined variable: _SESSION in C:\laragon\www\logcontrol\server\authcontrol.php on line 6
+[27-Nov-2018 12:22:27 UTC] PHP Fatal error:  Uncaught Error: Call to a member function logout() on boolean in C:\laragon\www\logcontrol\server\authcontrol.php:27
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\server\authcontrol.php on line 27
+[27-Nov-2018 12:49:29 UTC] PHP Notice:  Undefined variable: con in C:\laragon\www\logcontrol\server\authcontrol.php on line 15
+[27-Nov-2018 12:49:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in C:\laragon\www\logcontrol\server\classes\User.php:74
+Stack trace:
+#0 C:\laragon\www\logcontrol\server\authcontrol.php(15): Server\Classes\User->login(NULL, 'admin', '5b722b307fce6c9...')
+#1 {main}
+  thrown in C:\laragon\www\logcontrol\server\classes\User.php on line 74
+[27-Nov-2018 13:01:03 UTC] PHP Notice:  Undefined variable: _SESSION in C:\laragon\www\logcontrol\server\authcontrol.php on line 32
+[27-Nov-2018 13:01:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function logout() on boolean in C:\laragon\www\logcontrol\server\authcontrol.php:33
+Stack trace:
+#0 {main}
+  thrown in C:\laragon\www\logcontrol\server\authcontrol.php on line 33
+[27-Nov-2018 13:26:38 UTC] PHP Notice:  Accessing static property Server\Classes\User::$id as non static in C:\laragon\www\logcontrol\server\classes\User.php on line 27
+[27-Nov-2018 13:26:38 UTC] PHP Notice:  Accessing static property Server\Classes\User::$username as non static in C:\laragon\www\logcontrol\server\classes\User.php on line 28
+[27-Nov-2018 13:27:44 UTC] PHP Notice:  Accessing static property Server\Classes\User::$id as non static in C:\laragon\www\logcontrol\server\classes\User.php on line 27
+[27-Nov-2018 13:27:44 UTC] PHP Notice:  Accessing static property Server\Classes\User::$username as non static in C:\laragon\www\logcontrol\server\classes\User.php on line 28
+[27-Nov-2018 13:49:09 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in C:\laragon\www\logcontrol\server\authcontrol.php on line 25
+[27-Nov-2018 13:52:23 UTC] PHP Warning:  Illegal string offset 'username' in C:\laragon\www\logcontrol\server\authcontrol.php on line 16
+[27-Nov-2018 13:52:23 UTC] PHP Warning:  Illegal string offset 'password' in C:\laragon\www\logcontrol\server\authcontrol.php on line 17

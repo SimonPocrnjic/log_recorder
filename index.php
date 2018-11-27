@@ -1,11 +1,7 @@
-<?php include_once "includes/header.php"; ?>
-<?php 
-    require_once "server/login.php"; 
-
-?>
+<?php include_once "includes/header.php";?>
 <?php if (!Server\Classes\User::login_check($con)): ?>
     <div class="row justify-content-center" style="padding-top:50%;">
-        <form class="col-4 bg-light text-dark p-3" style="margin-top:-25%;" method="POST" action="<?php $_SERVER["PHP_SELF"];?>" id="login">
+        <form class="col-4 bg-light text-dark p-3" style="margin-top:-25%;" method="POST" action="server/authcontrol.php" id="login">
             <div class="form-group">    
                 <h4>Login to dashboard</h4>
             </div>
@@ -23,11 +19,11 @@
         </form>
     </div>
 <?php else: ?>
-    <form method="POST" action="<?php $_SERVER["PHP_SELF"];?>">
-        <input type="submit" name="logout">
-    </form>
     <p>Logged user: <?php echo $logged->username(); ?></p>
-
-
+    <p><a href="projects">My projects</a></p>
+    <form method="POST" action="server/authcontrol.php">
+        <input type="submit" name="logout" value="Logout">
+    </form>
+    
 <?php endif; ?>
 <?php include_once "includes/header.php"; ?>

@@ -6,11 +6,12 @@
        require_once 'server/autoload.php';
        require_once 'server/connection.php';
 
-   } else {
+    } else {
        require_once "../server/functions.php";
        require_once '../server/autoload.php';
        require_once '../server/connection.php';
-   }
+    }
+
     sec_session_start(); 
 
     if(isset($_SESSION['user'])){

@@ -23,7 +23,7 @@
 
         }
 
-        function setUser($id, $username, $email, $role, $created, $updated) {
+        public function setUser($id, $username, $email, $role, $created, $updated) {
             $this->id = $id;
             $this->username = $username;
             $this->email = $email;
@@ -32,23 +32,31 @@
             $this->updated = $updated;
         }
 
-        function id() {
+        public function id() {
             return $this->id;
         }
 
-        function username() {
+        public function username() {
             return $this->username;
         }
 
-        function email() {
+        public function email() {
             return $this->email;
         }
 
-        function role() {
+        public function role() {
             return $this->role;
         }
 
-        function create($mysqli, $username, $email, $password, $role) {
+        public function authorizedUser() {
+            if($this->role != 1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        public function create($mysqli, $username, $email, $password, $role) {
             $sql = "INSERT INTO users(username, password, email, role) VALUES (?,?,?,?)";
             if($stmt = $mysqli->prepare($sql)){
                 $stmt->bind_param('sssi', $this->username, $this->password, $this->email, $this->role);
@@ -61,7 +69,7 @@
             }
         }
 
-        function login($mysqli, $username, $password) {
+        public function login($mysqli, $username, $password) {
             //$sql = "SELECT * FROM users WHERE username = ? LIMIT 1";
             if($stmt = $mysqli->prepare("SELECT * FROM users WHERE username = ? LIMIT 1")){
                 $stmt->bind_param("s", $username);
@@ -96,29 +104,26 @@
 
         static function login_check($mysqli)
         {
-            // Check if all session variables are set
-            if (isset($_SESSION['user_id'],
-                $_SESSION['username'],
-                $_SESSION['login_string'])) {
-
-                $user_id      = $_SESSION['user_id'];
+            if (isset($_SESSION['user'])) {
+                $logged = unserialize($_SESSION['user']);
+                $user_id      = $logged->id();
                 $login_string = $_SESSION['login_string'];
-                $username     = $_SESSION['username'];
+                $user_name     = $logged->username();
 
                 // Get the user-agent string of the user.
                 $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-                if ($stmt = $mysqli->prepare("SELECT *
+                if ($stmt = $mysqli->prepare("SELECT password
                                             FROM users
-                                            WHERE id = ? LIMIT 1")) {
+                                            WHERE id = ? AND username = ? LIMIT 1")) {
                     // Bind "$user_id" to parameter.
-                    $stmt->bind_param('i', $user_id);
+                    $stmt->bind_param('is', $user_id, $user_name);
                     $stmt->execute(); // Execute the prepared query.
                     $stmt->store_result();
 
                     if ($stmt->num_rows == 1) {
                         // If the user exists get variables from result.
-                        $stmt->bind_result($id, $username, $password, $email, $role, $created, $updated);
+                        $stmt->bind_result($password);
                         $stmt->fetch();
                         $login_check = hash('sha512', $password . $user_browser);
 
@@ -142,7 +147,7 @@
             }
         }
 
-        function logout() {
+        public function logout() {
             $_SESSION = array();
 	
             $params = session_get_cookie_params();
@@ -157,7 +162,7 @@
             session_destroy();
         }
 
-        function __destruct() {
+        public function __destruct() {
         }
 
     }
