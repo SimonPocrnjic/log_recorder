@@ -43,19 +43,23 @@ function getFileList($dir, $recurse = FALSE, $depth = FALSE)
 
     return $retval;
   }
+//var_dump(getFileList('users/admin/simons_projects'));
+$array = getFileList('users/admin/simons_projects');
 
-var_dump(getFileList('users/admin'));
+foreach ($array as $dir) {
+  echo $dir['name']."<br>";
+}
 
-echo "<br>".str_replace(' ', "_", "something sdwddd dwd");
+//echo "<br>".str_replace(' ', "_", "something sdwddd dwd");
+
+echo LOG_PID;
 
 // if(isset($_GET['test'])){
 //   print_r($_SERVER['REQUEST_METHOD']);
   
 // }
 
-//openlog('CrawlerApp', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER);
-syslog(LOG_ERR, "User #14 is logged from two different places.");
-//closelog();
+error_log('something something', 1, "riperus19922@gmail.com");
 //define_syslog_variables();
 ?>
 
