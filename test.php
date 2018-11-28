@@ -59,7 +59,7 @@ echo LOG_PID;
   
 // }
 
-error_log('something something', 1, "riperus19922@gmail.com");
+log('something something', 1, "riperus19922@gmail.com");
 //define_syslog_variables();
 ?>
 
