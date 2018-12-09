@@ -56,6 +56,7 @@
             }
         }
 
+
         public function create($mysqli, $username, $email, $password, $role) {
             $sql = "INSERT INTO users(username, password, email, role) VALUES (?,?,?,?)";
             if($stmt = $mysqli->prepare($sql)){
@@ -66,6 +67,23 @@
 
             } else {
                 return $mysqli->connect_error;
+            }
+        }
+
+        public function getUser($mysqli, $id) {
+            if($stmt = $mysqli->prepare("SELECT username FROM users WHERE id = ? LIMIT 1")){
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($username);
+                if($stmt->num_rows == 1) {
+                    $stmt->fetch();
+                    return $username;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
             }
         }
 

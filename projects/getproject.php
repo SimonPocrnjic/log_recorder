@@ -1,0 +1,57 @@
+<?php
+    if($project->getProject($con, $_GET['project'])):
+        require_once "../server/filecontroller.php";
+        $dirname = str_replace(' ', '_',  $project->getTitle());
+        $dirpath = "../users/".$logged->username()."/".$dirname."/";
+        $filelist = getFileList($dirpath);
+?>
+<table class="table table-striped mt-5">
+ <thead>
+ <tr>
+                            <td>Upload file</td>
+                            <td colspan="4">
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" onchange="readInput(this)" name="file" id="file" aria-describedby="inputGroupFile">
+                                            <label class="custom-file-label" for="file">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <input class="btn btn-outline-secondary" type="submit" name="upload" value="Upload" id="inputGroupFile">
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                       <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Last modified</th>
+                        <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            foreach ($filelist as $file): 
+                                $dirfullname = str_replace('/', ' ', $file['name']);
+                                $dirarray = explode(" ", rtrim($dirfullname));
+                                $dirname = end($dirarray);
+                        ?>
+                            <tr>
+                                <td><?php echo $dirname ?></td>
+                                <td><?php echo $file['type'] ?></td>
+                                <td><?php echo $file['size']." Bytes" ?></td>
+                                <td><?php echo date('d-m-Y H:i:s', $file['lastmod']) ?></td>
+                                <td>
+                                    <form action="" method="post">
+                                        <input type="hidden" value="<?php echo $dirname ?>" name="filename">
+                                        <input type="submit" name="delfile" class="btn btn-danger" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
+                <a href="/projects">Back to project list</a>
+    <?php endif;?>

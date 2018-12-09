@@ -1,4 +1,0 @@
-[28-Nov-2018 14:35:13 UTC] PHP Parse error:  syntax error, unexpected 'M' (T_STRING) in C:\laragon\www\logcontrol\test.php on line 62
-[28-Nov-2018 14:35:14 UTC] PHP Parse error:  syntax error, unexpected 'M' (T_STRING) in C:\laragon\www\logcontrol\test.php on line 62
-[28-Nov-2018 14:35:20 UTC] something something
-[28-Nov-2018 14:35:21 UTC] something something

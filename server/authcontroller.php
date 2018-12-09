@@ -1,8 +1,9 @@
 <?php 
 
 require_once "functions.php";
-require_once "connection.php";
-require_once "autoload.php";
+require_once 'autoload.php';
+require_once 'connection.php';
+
 
 use Server\Classes\User;
 
@@ -24,6 +25,7 @@ if(isset($_REQUEST['login'])){
             echo "<a href=".$_SERVER['HTTP_REFERER'].">Return to login</a>";
         }
     } else {
+        echo "The input is incorrect try again! <a href='".$_SERVER['HTTP_REFERER']."'></a>";
     }
     
 } 
