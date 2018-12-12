@@ -4,7 +4,7 @@ use Server\Classes\User as User;
 
 if(isset($logged) && $logged->authorizedUser()) {
 
-    $users = $logged->getUserList($con);
+    $users = (!$logged->getUserList($con)) ? [] : $logged->getUserList($con);
 
     if(isset($_REQUEST['createuser'])) {
         $validate = validate($_POST);
@@ -17,6 +17,7 @@ if(isset($logged) && $logged->authorizedUser()) {
             $email = $validate['email'];
             if($newuser->create($con, $username, $password, $email)) {
                 echo "User created";
+                $users = $logged->getUserList($con);
             } else {
                 echo "Failed to create user";
             }

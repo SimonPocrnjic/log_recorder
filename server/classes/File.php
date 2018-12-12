@@ -82,6 +82,27 @@ class File {
         }
     }
 
+    public function downloadFile($filename, $username, $projname) {
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . "/users/".$username."/".$projname."/".$filename;
+
+        if(file_exists($filePath)) {
+            $fileName = basename($filePath);
+            $fileSize = filesize($filePath);
+
+            header("Cache-Control: private");
+            header("Content-Type: application/stream");
+            header("Content-Length: ".$fileSize);
+            header("Content-Disposition: attachment; filename=".$fileName);
+
+            readfile ($filePath);                   
+            exit();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public function __destruct() {
 
     }        

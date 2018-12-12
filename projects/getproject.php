@@ -51,7 +51,7 @@
                                 <td><?php echo date('d-m-Y H:i:s', $file['lastmod']) ?></td>
                                 <?php if($logged->id() == $project->getUserid() || $logged->authorizedUser()): ?>
                                 <td>
-                                    <form action="" method="post">
+                                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                                         <input type="hidden" value="<?php echo $dirname ?>" name="filename">
                                         <input type="submit" name="delfile" class="btn btn-danger" value="Delete">
                                     </form>

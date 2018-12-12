@@ -15,7 +15,7 @@
         else:    
     ?>
     <?php if(!$logged->authorizedUser()): ?>
-        <form class="col bg-light text-dark p-3" method="POST" action="">
+        <form class="col bg-light text-dark p-3" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             <div class="form-group">    
                 <h4>Create new project</h4>
             </div>
@@ -32,6 +32,25 @@
             </div>
         </form>
     <?php else: ?>
+        <a class="btn btn-primary m-2" data-toggle="collapse" href="#collapseForm" role="button" aria-expanded="false" aria-controls="collapseForm">
+             Add Test Project
+        </a>
+        <form class="col bg-light text-dark p-3 collapse" method="POST" id="collapseForm" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+            <div class="form-group">    
+                <h4>Create new project</h4>
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input class="form-control" type="text" name="title">
+            </div>
+            <div class="form-group">
+                <label for="desc">Description:</label>
+                <textarea class="form-control" name="desc"></textarea>
+            </div>
+            <div class="text-right">
+                <input type="submit" value="Create" class="btn btn-primary" name="newproj">
+            </div>
+        </form>
         <div class="card-header">
             Users Projects
         </div>
@@ -59,7 +78,7 @@
                                 </td>
                                 <td><?php echo $proj['projcreated'] ?></td>
                                 <td>
-                                    <form action="" method="POST">
+                                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
                                         <input type="hidden" value="<?php echo $proj['projtitle'] ?>" name="title">
                                         <input type="hidden" value="<?php echo $proj['projid'] ?>" name="id">
                                         <?php if($logged->authorizedUser()): ?>

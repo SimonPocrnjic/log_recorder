@@ -35,7 +35,7 @@
             }
             $dirname = str_replace(' ', '_', $title);
             $path = "../users/".$user."/".$dirname;
-            if(!$project->delPorject($con, $id, $path)){
+            if(!$project->delPorject($con, $id, $logged, $path)){
                 $error_msg = "Could not delete projects";
             }
         }

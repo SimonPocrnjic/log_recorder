@@ -2,7 +2,7 @@
     include "includes/header.php"; 
     require_once "server/usercontrol.php";    
 ?> 
-        <form class="bg-light text-dark p-3" method="POST" action="" id="createuser">
+        <form class="bg-light text-dark p-3" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" id="createuser">
             <div class='row'>
                 <div class="form-group col-lg-2">    
                     <h4>Create User</h4>

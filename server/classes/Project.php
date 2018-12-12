@@ -70,7 +70,7 @@ class Project {
 
         $userid = $user->id();
         $username = $user->username();
-        $msg = "User ".$username." created new projects named ".$name;
+        $msg = "User ".$username." created new project named ".$name;
         if($stmt = $mysqli->prepare('SELECT * FROM projects WHERE title = ? AND user_id = ? LIMIT 1')){
             $stmt->bind_param('si', $name, $userid);
             $stmt->execute();
@@ -175,8 +175,10 @@ class Project {
         }
     }
 
-    public function delPorject($mysqli, $id, $dir) {
+    public function delPorject($mysqli, $id, User $auth, $dir) {
         $success = false;
+        $projname = $this->getProjectTitle($mysqli, $id);
+        $msg = "User ".$auth->username()." deleted project named ".$projname;
         if($stmt = $mysqli->prepare('DELETE FROM projects WHERE id = ?')) {
             $stmt->bind_param('i', $id);
             $files = array_diff(scandir($dir), array('.','..')); 
@@ -185,6 +187,8 @@ class Project {
             } 
             if(rmdir($dir)) {
                 $stmt->execute();
+                $level = Log::SEVERITY_LEVEL['NOTICE'];
+                Log::saveLog($mysqli, $msg, $level, 'DATABASE DELETE DATA, REMOVE DIRECTORY', $auth->id(), $id);
                 $success = true;
             }
         }

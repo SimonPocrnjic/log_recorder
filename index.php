@@ -53,7 +53,7 @@
                 </form>
             </li>
             <li class="nav-item mr-2">
-                <form action="" method="post">
+                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <input type="submit" name="clearlog" class="btn btn-success" value="Clear Log"/>
                 </form>
             </li>

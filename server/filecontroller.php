@@ -22,3 +22,4 @@
             echo "Something went wrong deleting file";
         } 
     }
+
