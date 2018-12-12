@@ -1,69 +1,40 @@
 <?php 
+  include_once "includes/header.php";
+?>
 
-require_once "includes/header.php";
+<?php 
 
-function getFileList($dir, $recurse = FALSE, $depth = FALSE)
-  {
-    $retval = [];
+use Server\Classes\Log;
+use Server\Classes\Project;
 
-    // add trailing slash if missing
-    if(substr($dir, -1) != "/") {
-      $dir .= "/";
-    }
 
-    // open pointer to directory and read list of files
-    $d = @dir($dir) or die("getFileList: Failed opening directory {$dir} for reading");
-    while(FALSE !== ($entry = $d->read())) {
-      // skip hidden files
-      if($entry{0} == ".") continue;
-      if(is_dir("{$dir}{$entry}")) {
-        $retval[] = [
-          'name' => "{$dir}{$entry}/",
-          'type' => filetype("{$dir}{$entry}"),
-          'size' => 0,
-          'lastmod' => filemtime("{$dir}{$entry}")
-        ];
-        if($recurse && is_readable("{$dir}{$entry}/")) {
-          if($depth === FALSE) {
-            $retval = array_merge($retval, getFileList("{$dir}{$entry}/", TRUE));
-          } elseif($depth > 0) {
-            $retval = array_merge($retval, getFileList("{$dir}{$entry}/", TRUE, $depth-1));
-          }
-        }
-      } elseif(is_readable("{$dir}{$entry}")) {
-        $retval[] = [
-          'name' => "{$dir}{$entry}",
-          'type' => mime_content_type("{$dir}{$entry}"),
-          'size' => filesize("{$dir}{$entry}"),
-          'lastmod' => filemtime("{$dir}{$entry}")
-        ];
-      }
-    }
-    $d->close();
-
-    return $retval;
-  }
 //var_dump(getFileList('users/admin/simons_projects'));
-$array = getFileList('users/admin/simons_projects');
 
-foreach ($array as $dir) {
-  echo $dir['name']."<br>";
-}
 
 //echo "<br>".str_replace(' ', "_", "something sdwddd dwd");
 
-echo LOG_PID;
 
 // if(isset($_GET['test'])){
 //   print_r($_SERVER['REQUEST_METHOD']);
   
 // }
 
-log('something something', 1, "riperus19922@gmail.com");
+//Log::saveLog($con, "create", 1, "POST DATA", 1, 1);
+
+
+$logs = new Log($logged);
+
+$code = hash('sha512', 'password');
+
+echo $code;
+
 //define_syslog_variables();
 ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="get">
-  <input type="text" name="test">
-  <input type="submit" value="Submit">
-</form>
+
+
+      <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" name="upload" value="Submit">
+      </form>
+

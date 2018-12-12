@@ -22,13 +22,18 @@
     }
 
     if(isset($_REQUEST['delproj'])) {
-        
+        $user = "";
         $validate = validate($_POST);
         if($validate){
             $title = $validate['title'];
             $id = $validate['id'];
+            if($logged->authorizedUser()) {
+                $userid = $validate['userid'];
+                $user = $logged->getUser($con, $userid);
+            } else {
+                $user = $logged->username();
+            }
             $dirname = str_replace(' ', '_', $title);
-            $user = $logged->username();
             $path = "../users/".$user."/".$dirname;
             if(!$project->delPorject($con, $id, $path)){
                 $error_msg = "Could not delete projects";

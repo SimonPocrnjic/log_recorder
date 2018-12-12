@@ -18,7 +18,7 @@
 
         if($array = $logs->getLog($con)) {
             $output .= 
-                '<table class="table" bordered="1">
+                '<table class="table">
                     <tr>
                         <th>Message</th>
                         <th>Level</th>

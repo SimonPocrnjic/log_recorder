@@ -57,16 +57,29 @@
         }
 
 
-        public function create($mysqli, $username, $email, $password, $role) {
-            $sql = "INSERT INTO users(username, password, email, role) VALUES (?,?,?,?)";
-            if($stmt = $mysqli->prepare($sql)){
-                $stmt->bind_param('sssi', $this->username, $this->password, $this->email, $this->role);
-                $stmt->execute();
-
-                return "User was created.";
-
+        public function create($mysqli, $username, $password, $email) {
+            if($getuser = $mysqli->prepare('SELECT id FROM users WHERE username = ? LIMIT 1')) {
+                $getuser->bind_param('s', $username);
+                $getuser->execute();
+                $getuser->store_result();
+                if($getuser->num_rows == 0) {
+                    $sql = "INSERT INTO users(username, password, email) VALUES (?,?,?)";
+                    if($stmt = $mysqli->prepare($sql)){
+                        $stmt->bind_param('sss', $username, $password, $email);
+                        if($stmt->execute()){
+                            return true;
+                        } else {
+                            return false;
+                        }
+        
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             } else {
-                return $mysqli->connect_error;
+                return false;
             }
         }
 
@@ -79,6 +92,30 @@
                 if($stmt->num_rows == 1) {
                     $stmt->fetch();
                     return $username;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        public function getUserList($mysqli) {
+            $users_array = [];
+            if($stmt = $mysqli->prepare("SELECT id, username, email, created_at FROM users WHERE id <> 1 ORDER BY id DESC")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($id, $username, $email, $created);
+                if($stmt->num_rows > 0) {
+                    while($stmt->fetch()){
+                        array_push($users_array, array(
+                            'userid' => $id, 
+                            'username' => $username, 
+                            'useremail' => $email, 
+                            'usercreated' => $created
+                        ));
+                    }
+                    return $users_array;
                 } else {
                     return false;
                 }

@@ -60,7 +60,11 @@ class File {
     }
 
     public function deleteFile($mysqli, $file, User $auth, Project $proj){
-        $user = $auth->username();
+        if($auth->authorizedUser()){
+            $user = $auth->getUser($mysqli, $proj->getUserid());
+        } else {
+            $user = $auth->username();
+        }
         $project = $proj->getTitle();
         $dirname = str_replace(' ', '_', $project);
         $level = Log::SEVERITY_LEVEL;

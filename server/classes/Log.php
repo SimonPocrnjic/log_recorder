@@ -5,7 +5,7 @@ namespace Server\Classes;
 class Log {
     private $content;
     private $created;
-    public const SEVERITY_LEVEL = array(
+    const SEVERITY_LEVEL = array(
         "EMERG" => 'Emergency',
         "ALERT" => 'Alert',
         "CRIT" => 'Critical',
@@ -22,9 +22,9 @@ class Log {
         }
     }
 
-    public static function saveLog($mysqli, $msg, $level, $type, $user_id, $proj_id) {
+    public static function saveLog($mysqli, $msg, $level, $type, $user, $proj) {
         if($log = $mysqli->prepare('INSERT INTO logs(message, level, type, user_id, project_id) VALUES (?,?,?,?,?);')){
-            $log->bind_param("sssii", $msg, $level, $type, $user_id, $proj_id);
+            $log->bind_param("sssss", $msg, $level, $type, $user, $proj);
             $log->execute();
             $log->close();
             return true;
@@ -38,16 +38,16 @@ class Log {
         $array = [];
         switch($getby) {
             case 1:
-                $sql.= " WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+                $sql.= " WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY id DESC";
                 break;
             case 2:
-                $sql.= " WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
+                $sql.= " WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY id DESC";
                 break;
             case 3:
-                $sql.= " WHERE level = ?";
+                $sql.= " WHERE level = ? ORDER BY id DESC";
                 break;
             default:
-                $sql;
+                $sql.= " ORDER BY id DESC";
         }
 
         if($log = $mysqli->prepare($sql)) {
@@ -74,6 +74,18 @@ class Log {
                 return $array;
             } else { return false; }
         } else { return false; }
+    }
+
+    public function clearLog($mysqli) {
+        if($stmt = $mysqli->prepare('TRUNCATE TABLE logs')) {
+            if($stmt->execute()) {
+            return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     public function __destruct() {

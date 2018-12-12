@@ -6,3 +6,4 @@ function __autoload ($class) {
   $filename = "classes/".end($parts).".php";
   require_once($filename);
 }
+

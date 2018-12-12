@@ -9,12 +9,14 @@ class Project {
     private $id;
     private $title; 
     private $desc;
+    private $userid;
     private $created;
     private $updated;
+    private $dir;
 
     public function __construct($auth) {
         if($auth == null) {
-            header('Location: ../');
+            header('Location: '.URL);
         }
     }
 
@@ -24,6 +26,16 @@ class Project {
         $this->desc = $desc;
         $this->created = $created;
         $this->updated = $updated;
+    }
+
+    public function setProjectWithDir($id, $title, $desc, $userid, $created, $updated, $dir) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->desc = $desc;
+        $this->userid = $userid;
+        $this->created = $created;
+        $this->updated = $updated;
+        $this->dir = $dir;
     }
 
     public function getId() {
@@ -38,12 +50,20 @@ class Project {
         return $this->desc;
     }
 
+    public function getUserid() {
+        return $this->userid;
+    }
+
     public function getCreated() {
         return $this->created;
     }
 
     public function getUpdated() {
         return $this->updated;
+    }
+
+    public function getDir() {
+        return $this->dir;
     }
 
     public function create($mysqli, $name, $desc, User $user){
@@ -86,6 +106,39 @@ class Project {
             $stmt->close();
         } else {
             return "4";
+        }
+    }
+
+    public function getAllProjs($mysqli) {
+        $success = false;
+        $proj_array = [];
+        $user = User::getInstance();
+        if($stmt = $mysqli->prepare('SELECT * FROM projects ORDER BY id DESC')) {
+            $stmt->execute();
+            $stmt->store_result();
+            $stmt->bind_result($id, $title, $desc, $userid, $created, $updated);
+            if($stmt->num_rows() > 0) {
+                while($stmt->fetch()) {
+                    $username = $user->getUser($mysqli, $userid);
+                    $dirname = str_replace(' ', '_',  $title);
+                    $dirpath = "../users/".$username."/".$dirname."/";    
+                    array_push($proj_array, array(
+                        'projid' => $id, 
+                        'projtitle' => $title, 
+                        'projdesc' => $desc, 
+                        'projuser' => $userid, 
+                        'projcreated' => $created, 
+                        'projupdated' => $updated,
+                        'projpath' => $dirpath 
+                    ));
+                }
+                $success = true;
+            }
+        }
+        if($success == true) {
+            return $proj_array;
+        } else {
+            return false;
         }
     }
 
@@ -140,6 +193,7 @@ class Project {
 
     public function getProject($mysqli, $id) {
         $success = false;
+        $user = User::getInstance();
         if($stmt = $mysqli->prepare('SELECT * FROM projects WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $id);
             $stmt->execute();
@@ -147,7 +201,10 @@ class Project {
             $stmt->bind_result($proj_id, $title, $desc, $userid, $created, $updated);
             if($stmt->num_rows() == 1) {
                 $stmt->fetch();
-                $this->setProject($proj_id, $title, $desc, $userid, $created, $updated);
+                $username = $user->getUser($mysqli, $userid);
+                $dirname = str_replace(' ', '_',  $title);
+                $dir = "../users/".$username."/".$dirname."/";
+                $this->setProjectWithDir($id, $title, $desc, $userid, $created, $updated, $dir);
                 $success = true;
             } 
         }
@@ -155,7 +212,7 @@ class Project {
         return $success ;
     }
 
-    public getProjectTitle($mysqli, $id) {
+    public function getProjectTitle($mysqli, $id) {
         if($stmt = $mysqli->prepare('SELECT title FROM projects WHERE id = ? LIMIT 1')) {
             $stmt->bind_param('i', $id);
             $stmt->execute();

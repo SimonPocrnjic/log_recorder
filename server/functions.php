@@ -30,10 +30,12 @@ function validate($request) {
                 if(!empty($value)){
                     if($key == "password") {
                         $new_value = hash("sha512", filter_input(INPUT_POST, $key, FILTER_SANITIZE_STRING));
+                    } else if($key == "email"){
+                        $new_value = filter_input(INPUT_POST, $key, FILTER_SANITIZE_EMAIL);
                     } else {
                         $new_value = filter_input(INPUT_POST, $key, FILTER_SANITIZE_STRING);
                     }
-                    $request_array[$key] = $new_value;
+                    $request_array[$key] = trim($new_value);
                 } else {
                      $error_check_ok = false;
                 } 
@@ -42,7 +44,7 @@ function validate($request) {
             if($error_check_ok == true) {
                 return $request_array;
             } else {
-                return "Inputs can't be empty";
+                return false;
             }
         }
 

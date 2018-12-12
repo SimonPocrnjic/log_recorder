@@ -10,7 +10,6 @@ use Server\Classes\User;
 sec_session_start(); 
 
 if(isset($_REQUEST['login'])){
-    $error_msg = "";
     $validate = validate($_POST);
     if($validate != false) {
         $user = User::getInstance();
@@ -35,5 +34,5 @@ if(isset($_REQUEST['logout'])){
     $logged = unserialize($_SESSION['user']);
     $logged->logout();
     unset($logged);
-    header('Location: '. $_SERVER['HTTP_REFERER']);
+    header('Location: '.URL);
 }

@@ -1,16 +1,8 @@
 <?php 
-    $trim_url = preg_replace("/\/+[a-zA-z0-9]+.php/","", $_SERVER['PHP_SELF']);
 
-    if($trim_url == ""){
-       require_once "server/functions.php";
-       require_once 'server/autoload.php';
-       require_once 'server/connection.php';
-
-    } else {
-       require_once "../server/functions.php";
-       require_once '../server/autoload.php';
-       require_once '../server/connection.php';
-    }
+    require_once __DIR__.'/../server/functions.php';
+    require_once __DIR__.'/../server/autoload.php';
+    require_once __DIR__.'/../server/connection.php';
 
     sec_session_start(); 
 
@@ -34,19 +26,22 @@
 <body>
     <?php if(Server\Classes\User::login_check($con)): ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Dashboard</a>
+    <a class="navbar-brand" href="<?php echo URL ?>">Log Control</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="/">Home</a>
-            <a class="nav-item nav-link" href="/projects">Projects</a>
+            <a class="nav-item nav-link" href="<?php echo URL ?>">Home</a>
+            <a class="nav-item nav-link" href="<?php echo URL."projects" ?>">Projects</a>
+            <?php if($logged->authorizedUser()): ?>
+            <a class="nav-item nav-link" href="<?php echo URL."users.php" ?>">Users</a>
+            <?php endif; ?>
         </div>
-        <form method="POST" class="form-inline my-2 my-lg-0" action="server/authcontroller.php">
+        <form method="POST" class="form-inline my-2 my-lg-0" action="<?php echo URL."server/authcontroller.php" ?>">
             <span>Logged user: <?php echo ucfirst($logged->username()); ?>&nbsp;</span><input class="btn btn-outline-secondary my-2 my-sm-0" type="submit" name="logout" value="Logout">
         </form>
     </div>
     </nav>
     <?php endif; ?>
-    <div class="container">
+    <div class="container mt-3">

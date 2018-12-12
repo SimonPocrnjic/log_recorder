@@ -1,7 +1,12 @@
 <?php 
     include "../includes/header.php";
     require_once "../server/projectcontroller.php";
-    $projects = $project->getuserProjs($con, $logged);
+    
+    if($logged->authorizedUser()){
+        $projects = $project->getAllProjs($con);
+    } else {
+        $projects = $project->getUserProjs($con, $logged);
+    }
 ?>
 <?php if ($logged->login_check($con)): ?>
     <?php 
@@ -9,7 +14,7 @@
             include_once "getproject.php";
         else:    
     ?>
-    <div class="row justify-content-center">
+    <?php if(!$logged->authorizedUser()): ?>
         <form class="col bg-light text-dark p-3" method="POST" action="">
             <div class="form-group">    
                 <h4>Create new project</h4>
@@ -26,9 +31,12 @@
                 <input type="submit" value="Create" class="btn btn-primary" name="newproj">
             </div>
         </form>
-    </div>
-    <div class="row justify-content-center">
-             <?php if($projects == false):?>
+    <?php else: ?>
+        <div class="card-header">
+            Users Projects
+        </div>
+    <?php endif; ?>
+            <?php if($projects == false):?>
             <li class="list-group-item">No projects were found!</li>
             <?php else: ?>
                 <table class="table table-striped mt-5">
@@ -43,7 +51,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($projects as $proj): ?>
-                            <tr>
+                            <tr>    
                                 <td><?php echo $proj['projtitle'] ?></td>
                                 <td><?php echo count(getFileList($proj['projpath'])) ?></td>
                                 <td>
@@ -54,6 +62,9 @@
                                     <form action="" method="POST">
                                         <input type="hidden" value="<?php echo $proj['projtitle'] ?>" name="title">
                                         <input type="hidden" value="<?php echo $proj['projid'] ?>" name="id">
+                                        <?php if($logged->authorizedUser()): ?>
+                                            <input type="hidden" value="<?php echo $proj['projuser'] ?>" name="userid">
+                                        <?php endif; ?>
                                         <input type="submit" class="btn btn-danger" name="delproj" value="Delete">
                                     </form>
                                 </td>
@@ -62,7 +73,6 @@
                     </tbody>
                 </table>
             <?php endif;?>
-    </div>
     <?php endif;?>
 
 <?php else: ?>

@@ -1,4 +1,4 @@
-<?php include_once "includes/header.php";?>
+<?php include_once "includes/header.php"; ?>
 <?php if (!Server\Classes\User::login_check($con)): ?>
     <div class="row justify-content-center" style="padding-top:50%;">
         <form class="col-4 bg-light text-dark p-3" style="margin-top:-25%;" method="POST" action="server/authcontroller.php" id="login">
@@ -21,38 +21,44 @@
 <?php else: ?>
     <?php if($logged->authorizedUser()): ?>
         <?php require_once "server/logcontroller.php"; ?>
-        <div class="card border-0 mt-5">
         <div class="card-header">
             Log Control
         </div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="/?getlog=1">Hour</a>
+                <a class="nav-link" href="<?php echo URL; ?>">All</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/?getlog=2">Day</a>
+                <a class="nav-link" href="?getlog=1">Hour</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?getlog=2">Day</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Security Level</a>
                 <div class="dropdown-menu">
-                <a class="dropdown-item" href="/?getlog=3&level=Emergency">Emergency</a>
-                <a class="dropdown-item" href="/?getlog=3&level=Alert">Alert</a>
-                <a class="dropdown-item" href="/?getlog=3&level=Critical">Critical</a>
-                <a class="dropdown-item" href="/?getlog=3&level=Error">Error</a>
-                <a class="dropdown-item" href="/?getlog=3&level=Warning">Warning</a>
-                <a class="dropdown-item" href="/?getlog=3&level=Notice">Notice</a>
-                <a class="dropdown-item" href="/?getlog=3&level=Informational">Informational</a>
-                <a class="dropdown-item" href="/?getlog=3&level=Debug">Debug</a>
+                <a class="dropdown-item" href="?getlog=3&level=Emergency">Emergency</a>
+                <a class="dropdown-item" href="?getlog=3&level=Alert">Alert</a>
+                <a class="dropdown-item" href="?getlog=3&level=Critical">Critical</a>
+                <a class="dropdown-item" href="?getlog=3&level=Error">Error</a>
+                <a class="dropdown-item" href="?getlog=3&level=Warning">Warning</a>
+                <a class="dropdown-item" href="?getlog=3&level=Notice">Notice</a>
+                <a class="dropdown-item" href="?getlog=3&level=Informational">Informational</a>
+                <a class="dropdown-item" href="?getlog=3&level=Debug">Debug</a>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-2">
                 <form action="server/excel.php" method="post">
                     <input type="submit" name="export_excel" class="btn btn-success" value="Export to Excel"/>
                 </form>
             </li>
+            <li class="nav-item mr-2">
+                <form action="" method="post">
+                    <input type="submit" name="clearlog" class="btn btn-success" value="Clear Log"/>
+                </form>
+            </li>
         </ul>
-        <div class="card-body">
-        <p>Found: <?php echo count($getlogs) ?></p>
+        <p class="p-2 m-0">Found: <?php echo count($getlogs) ?></p>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -77,8 +83,6 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        </div>
-        </div>
     <?php else: ?>
 
         <div class="card">
@@ -88,7 +92,7 @@
         <div class="card-body">
             <h5 class="card-title">Dashboard</h5>
             <p class="card-text">Go to your projects page below.</p>
-            <a href="/projects" class="btn btn-primary">My projects</a>
+            <a href="<?php echo URL."projects" ?>" class="btn btn-primary">My projects</a>
         </div>
         </div>
     <?php 
