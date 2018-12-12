@@ -19,7 +19,7 @@
         </form>
     </div>
 <?php else: ?>
-    <?php if($logged->authorizedUser()): ?>
+    <?php if ($logged->authorizedUser()): ?>
         <?php require_once "server/logcontroller.php"; ?>
         <div class="card-header">
             Log Control
@@ -71,7 +71,7 @@
             </tr>
             </thead>
             <tbody>
-                <?php foreach($getlogs as $log): ?>
+                <?php foreach ($getlogs as $log): ?>
                     <tr>
                         <td><?php echo $log['logmessage'] ?></td>
                         <td><?php echo $log['loglevel'] ?></td>
@@ -95,8 +95,8 @@
             <a href="<?php echo URL."projects" ?>" class="btn btn-primary">My projects</a>
         </div>
         </div>
-    <?php 
+    <?php
         endif;
-    endif; 
+    endif;
     ?>
 <?php include_once "includes/footer.php"; ?>
